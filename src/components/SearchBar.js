@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-const SearchBar = (props) => {
+const SearchBar = ({getMovie}) => {
     const [ searchState, setSearchState ] = useState({
         searchFor: ''
     });
@@ -12,7 +12,8 @@ const SearchBar = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Get data declaration
-            console.log(searchState.searchFor);
+            // console.log(searchState.searchFor);
+        getMovie(searchState.searchFor);
         //
         setSearchState({searchFor: ''});
     };
