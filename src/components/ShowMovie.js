@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 const ShowMovie = ({movie})  => {
     
     // Testing
@@ -46,10 +46,9 @@ Website: "N/A"
 
     const loaded = () => {
         const result = movie.data;
+        const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`
         return(
             <>
-            {/* <h2>Data present</h2> */}
-            {/* {console.log(movie)} */}
             <h1>{result.Type}</h1>
             <h1> {result.Title}</h1>
             <img src={result.Poster} alt={result.Title}></img>
@@ -70,17 +69,27 @@ Website: "N/A"
                 <h3>Plot Summary: {result.Plot}</h3>
                 <h3>Production: {result.Production}</h3>
                 <h3>Website: {result.Website}</h3>
-                {/* <h3>Ratings: {result.Ratings}</h3> */}
 
-                {result.Ratings.forEach(result => {
+                {/* <h3>Ratings: {result.Ratings}</h3> */}
+                {/* {result.Ratings.forEach(result => {
+                    {console.log(result.Source)}
                     <h3>{result.Source}: {result.Value}</h3>
+                })} */}
+
+                {result.Ratings.map((result, index) => {
+                    return(
+                        <div key={index}>
+                    <h3>{result.Source}: {result.Value}</h3>
+                        </div>
+                );
                 })}
 
                 <h3>Writer(s): {result.Writer}</h3>
             </div>
 
             <div className='imdbBox'>
-                imdbid: {result.imdbID}
+                
+                imdbid: <a href={imdbLink} target='_blank' rel='noreferrer'>{result.imdbID}</a>
                 imdbrating: {result.imdbRating}
                 imdbVotes: {result.imdbVotes}
             </div>
