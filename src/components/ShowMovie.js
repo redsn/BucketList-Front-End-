@@ -17,9 +17,6 @@ const ShowMovie = ({movie})  => {
             <>
             {result.map((result, index) => {
                 return(
-                    // <div key={index}>
-                    //     <h1>{res.Title}</h1>
-                    // </div>
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
@@ -41,12 +38,6 @@ const ShowMovie = ({movie})  => {
                         <h3>Plot Summary: {result.Plot}</h3>
                         <h3>Production: {result.Production}</h3>
                         <h3>Website: {result.Website}</h3>
-
-                        {/* <h3>Ratings: {result.Ratings}</h3> */}
-                        {/* {result.Ratings.forEach(result => {
-                            {console.log(result.Source)}
-                            <h3>{result.Source}: {result.Value}</h3>
-                        })} */}
 
                         {result.Ratings.map((result, index) => {
                             return(
@@ -125,6 +116,7 @@ const ShowMovie = ({movie})  => {
     };
 
     const loadedAPI = () => {
+        console.log('error?')
         const result = movie.data;
         const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`
         return(
@@ -202,12 +194,14 @@ const ShowMovie = ({movie})  => {
                     </>
                 )
         }
-    } catch (error) {
         try {
+            // console.log('On try via API');
             return movie ? loadedAPI() : loading();
         } catch (error) {
+            // console.log('On MDB attempt')
             return movie ? loadedMDB() : loading();
         }
+    } catch (error) {
     }
 };
 
