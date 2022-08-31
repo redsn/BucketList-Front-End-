@@ -1,40 +1,5 @@
 import {Link} from 'react-router-dom';
 const ShowMovie = ({movie})  => {
-    
-    // Testing
-    // console.log(movie.data); Remember to search by movie.data or redefine
-
-    /* Temp housing for formating
-
-    {§Title: 'Batman', §Year: '1989', §Rated: 'PG-13', §Released: '23 Jun 1989', §Runtime: '126 min', …}
-§Actors: "Michael Keaton, Jack Nicholson, Kim Basinger"
-§Awards: "Won 1 Oscar. 9 wins & 26 nominations total"
-§BoxOffice: "$251,409,241"
-§Country: "United States, United Kingdom"
-§DVD: "22 Aug 1997"
-§Director: "Tim Burton"
-§Genre: "Action, Adventure"
-§Language: "English, French, Spanish"
-§Metascore: "69"
-Plot: "The Dark Knight of Gotham City begins his war on crime with his first major enemy being Jack Napier, a criminal who becomes the clownishly homicidal Joker."
-§Poster: "https://m.media-amazon.com/images/M/MV5BZTM2NmZlOTEtYTI5NS00N2JjLWJkNzItMmZkNDBlYmQzNDA2XkEyXkFqcGdeQXVyMTAxODYyODI@._V1_SX300.jpg"
-§Production: "N/A"
-§Rated: "PG-13"
-§Ratings: (3) [{…}, {…}, {…}]
-§Released: "23 Jun 1989"
-Response: "True"
-§Runtime: "126 min"
-§Title: "Batman"
-§Type: "movie"
-Website: "N/A"
-§Writer: "Bob Kane, Sam Hamm, Warren Skaaren"
-§Year: "1989"
-§imdbID: "tt0096895"
-§imdbRating: "7.5"
-§imdbVotes: "373,505"
-
-
-    */
 
     const loading  = () => {
         return(
@@ -44,7 +9,7 @@ Website: "N/A"
         )
     };
 
-    const test = () => {
+    const loadedMDB = () => {
         const result = movie;
         const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`;
 
@@ -159,7 +124,7 @@ Website: "N/A"
         // )
     };
 
-    const loaded = () => {
+    const loadedAPI = () => {
         const result = movie.data;
         const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`
         return(
@@ -224,10 +189,25 @@ Website: "N/A"
     // } else{
     //     return loading();
     // }
+
+    // console.log(movie.Message)
+    // if(movie.Message === "Failed"){
+        // } else {
+            
     try {
-        return movie ? loaded() : loading();
+        if(movie.Message === "Failed"){
+                return(
+                    <>
+                    <p> Unable to find a matching title. Please try again</p>
+                    </>
+                )
+        }
     } catch (error) {
-        return movie ? test() : loading();
+        try {
+            return movie ? loadedAPI() : loading();
+        } catch (error) {
+            return movie ? loadedMDB() : loading();
+        }
     }
 };
 
