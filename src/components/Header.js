@@ -1,8 +1,22 @@
+//===
+// Imports 
+//===
+
+import {Link} from 'react-router-dom';
+
+//===
+// Component
+//===
 
 const Header = (props) => {
     return(
         <>
-        <h1>HeaderPlaceholder</h1>
+        <Link to="/">
+            <div>Home</div>
+        </Link>
+        <Link to="search">
+            <div>Search</div>
+        </Link>
         </>)
 };
 
