@@ -3,7 +3,8 @@
 //===
 
 import './App.css';
-import {useState, useEffect}  from 'react';
+import {useEffect, useState}  from 'react';
+import { onAuthStateChanged, auth } from './firebase';
 
 //===
 // Components
@@ -19,6 +20,18 @@ function App() {
   //State for movie query
   const [movie, findMovie] = useState(null);
 
+  // User login
+  const [ userState, setUserState ] = useState(null);
+
+  // effect for unsub // will watch for changes and ensure  user actually signs out
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setUserState(user)
+    });
+    return unsubscribe;
+  }, []);
+
+
   const getMovie = async (term) => {
     const searchFor = await fetch(`http://localhost:4000/api/query/movies/${term}`);
 
@@ -30,18 +43,12 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   findMovie(null)
-  // }, [movie]);
-
 
   return (
     <>
     <div className="App">
-      <Header />
-      {/* <SearchBar getMovie={getMovie} />
-      <ShowMovie movie={movie} /> */}
-      <Main getMovie={getMovie} movie={movie} />
+      <Header user={userState}/>
+      <Main getMovie={getMovie} movie={movie} user={userState}/>
     </div>
     </>
   );

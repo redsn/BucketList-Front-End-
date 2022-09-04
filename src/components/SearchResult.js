@@ -1,4 +1,4 @@
-
+import {Link} from 'react-router-dom';
 
 function SearchResult ({movie}) {
 
@@ -22,7 +22,9 @@ function SearchResult ({movie}) {
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
+                    <Link to={result.Title}>
                     <img src={result.Poster} alt={result.Title}></img>
+                    </Link>
                     </div>
                 )
             })}
@@ -37,7 +39,9 @@ function SearchResult ({movie}) {
             <>
             <h1>{result.Type}</h1>
             <h1> {result.Title}</h1>
+            <Link to={result.Title}>
             <img src={result.Poster} alt={result.Title}></img>
+            </Link>
             </>
         )
     };

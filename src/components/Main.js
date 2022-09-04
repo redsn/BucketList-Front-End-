@@ -1,7 +1,7 @@
 //===
 // Imports
 //===
-import {Routes,Route,Navigate} from 'react-router-dom';
+import {Routes,Route} from 'react-router-dom';
 
 //===
 // Components
@@ -9,11 +9,13 @@ import {Routes,Route,Navigate} from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Search from '../pages/Search';
+import ShowMovie from '../components/ShowMovie';
 
 
 
 
-function Main({getMovie, movie}) {
+function Main({getMovie, movie, user}) {
+    // console.log(user);
 
     return(
         <>
@@ -28,6 +30,11 @@ function Main({getMovie, movie}) {
             <Route
                 path="/search"
                 element={<Search getMovie={getMovie} movie={movie}/>}
+            />
+
+            <Route
+                path="/search/:title"
+                element={<ShowMovie getMovie={getMovie} movie={movie} user={user}/>}
             />
 
             </Routes>

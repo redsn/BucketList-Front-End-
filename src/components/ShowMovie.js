@@ -1,5 +1,18 @@
+import {useEffect} from 'react';
 
-const ShowMovie = ({movie})  => {
+const ShowMovie = ({movie, user})  => {
+
+    console.log('test');
+    console.log(user);
+
+    const handleListAppend = async () => {
+        try {
+            const token = await user.getIdToken();
+            console.log(token);
+        } catch (error) {
+            
+        }
+    }
 
     const loading  = () => {
         return(
@@ -20,7 +33,7 @@ const ShowMovie = ({movie})  => {
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
-                    <img src={result.Poster} alt={result.Title}></img>
+                    <img onClick={handleListAppend} src={result.Poster} alt={result.Title}></img>
                     <div className="generalData">
                         <h3>Genre: {result.Genre}</h3>
                         <h3>Language: {result.Language}</h3>
