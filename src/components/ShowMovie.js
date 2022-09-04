@@ -1,11 +1,23 @@
 import {useEffect} from 'react';
 
+
 const ShowMovie = ({movie, user})  => {
 
     console.log('test');
     console.log(user);
 
+    const bucketList = () => {
+        try {
+            if(user){
+                return <h1>User exists</h1>
+            }
+        } catch (error) {
+            return <h2>No User Found</h2>
+        }
+    }
+
     const handleListAppend = async () => {
+          
         try {
             const token = await user.getIdToken();
             console.log(token);
@@ -28,6 +40,7 @@ const ShowMovie = ({movie, user})  => {
 
         return(
             <>
+            {bucketList()}
             {result.map((result, index) => {
                 return(
                     <div key={index}>
