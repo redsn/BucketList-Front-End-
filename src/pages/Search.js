@@ -3,13 +3,10 @@
 //==
 import SearchBar from "../components/SearchBar";
 import SearchResult from "../components/SearchResult";
-import {useEffect} from 'react';
+// import {useEffect} from 'react';
 // import ShowMovie from "../components/ShowMovie";
 
 function Search ({getMovie, movie}) {
-    useEffect(() => {
-        // findMovie(null);
-    })
     return(
         <>
         <SearchBar getMovie={getMovie} />

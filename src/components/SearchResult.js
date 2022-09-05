@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {useEffect} from 'react';
 
 function SearchResult ({movie}) {
 
@@ -14,15 +15,15 @@ function SearchResult ({movie}) {
 
     const loadedMDB = () => {
         const result = movie;
-
         return(
             <>
             {result.map((result, index) => {
+                const destination_url = `view/${result.imdbID}`
                 return(
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
-                    <Link to={result.Title}>
+                    <Link to={destination_url}>
                     <img src={result.Poster} alt={result.Title}></img>
                     </Link>
                     </div>

@@ -17,6 +17,8 @@ import Header from './components/Header';
 
 function App() {
 
+  const api_link = 'http://localhost:4000/api/query/movies/'
+
   //State for movie query
   const [movie, findMovie] = useState(null);
 
@@ -33,7 +35,7 @@ function App() {
 
 
   const getMovie = async (term) => {
-    const searchFor = await fetch(`http://localhost:4000/api/query/movies/${term}`);
+    const searchFor = await fetch(`${api_link}${term}`);
 
     try {
       const result = await searchFor.json();
@@ -48,7 +50,7 @@ function App() {
     <>
     <div className="App">
       <Header user={userState}/>
-      <Main getMovie={getMovie} movie={movie} user={userState}/>
+      <Main getMovie={getMovie} movie={movie} user={userState} api={api_link}/>
     </div>
     </>
   );

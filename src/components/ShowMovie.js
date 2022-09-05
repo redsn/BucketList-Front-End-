@@ -1,18 +1,65 @@
-import {useEffect} from 'react';
+// import {useEffect} from 'react';
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
+/*
+   onList: {type: Array}, // Array of user IDs
+    complete: 
+*/
 
-const ShowMovie = ({movie, user})  => {
+const ShowMovie = ({movie, user, api})  => {
 
-    console.log('test');
-    console.log(user);
+    let {findIMDB} = useParams();
+    const newApi = `${api}view/`
+    // console.log(test);
+    // console.log(newApi);
+
+    const [viewMovie, setViewMovie] = useState(null);
+
+    const findByID = async (param) => {
+        const imdbResult = await fetch(`${newApi}${findIMDB}`)
+        try {
+            const result = await imdbResult.json();
+            console.log(result)
+            // console.log(result);
+            setViewMovie(result);
+            console.log(viewMovie);
+            return;
+        } catch (error) {
+            console.log('error');
+        }
+    }
+
+    useEffect(() => {
+        findByID();
+    },[]);
 
     const bucketList = () => {
         try {
-            if(user){
-                return <h1>User exists</h1>
-            }
+            if(movie.onList && movie.complete){
+                const complete = movie.onList.length;
+                const onList = movie.complete.length;
+                return(
+                    <>
+                    <div>
+                        <h1>BucketList</h1>
+                        {complete} / {onList}
+                    </div>
+                    </>
+                )
+            } else {throw new Error('error')}
         } catch (error) {
-            return <h2>No User Found</h2>
+            // console.log('error state');
+            const complete = 0;
+            const onList = 0;
+            return(
+                <>
+                <div>
+                    <h3>Not on Anyone's List</h3>
+                    {complete} / {onList}
+                </div>
+                </>
+            )
         }
     }
 
@@ -40,8 +87,8 @@ const ShowMovie = ({movie, user})  => {
 
         return(
             <>
-            {bucketList()}
             {result.map((result, index) => {
+                {bucketList()}
                 return(
                     <div key={index}>
                     <h1>{result.Type}</h1>
