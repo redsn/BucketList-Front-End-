@@ -21,6 +21,7 @@ function App() {
 
   //State for movie query
   const [movie, findMovie] = useState(null);
+  // const [viewMovie, setViewMovie] = useState(null);
 
   // User login
   const [ userState, setUserState ] = useState(null);
@@ -39,6 +40,7 @@ function App() {
 
     try {
       const result = await searchFor.json();
+      // console.log(result);
       findMovie(result);
     } catch (error) {
       
