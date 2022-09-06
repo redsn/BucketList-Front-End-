@@ -26,7 +26,7 @@ function Main({getMovie, movie, findMovie, user, api}) {
 
             <Route 
                 path="/" 
-                element={<Home />} 
+                element={<Home user={user} api={api} />} 
             />
 
             <Route
