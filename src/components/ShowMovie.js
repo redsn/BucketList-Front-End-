@@ -28,18 +28,36 @@ const ShowMovie = ({movie, user, api})  => {
 
     useEffect(() => {
     findByID();
-    },[]);
+},[]);
 
-    const bucketList = () => {
+
+const handleListAppend = async (e) => {
+    // e.preventDefault();
+    try {
+        const addMe = {onList: [user.email]}
+        console.log(addMe);
+        await fetch(`${newApi}${findIMDB}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(addMe)
+        })
+    } catch (error) {
+        
+    }
+}
+    const bucketList = (movieData) => {
         try {
-            if(movie.onList && movie.complete){
-                const complete = movie.onList.length;
-                const onList = movie.complete.length;
+            if(movieData.onList && movieData.complete){
+                const complete = movieData.onList.length;
+                const onList = movieData.complete.length;
                 return(
                     <>
                     <div>
                         <h1>BucketList</h1>
                         {complete} / {onList}
+                        <button onClick={handleListAppend}>GTest</button>
                     </div>
                     </>
                 )
@@ -59,15 +77,6 @@ const ShowMovie = ({movie, user, api})  => {
         }
     }
 
-    const handleListAppend = async () => {
-          
-        try {
-            const token = await user.getIdToken();
-            console.log(token);
-        } catch (error) {
-            
-        }
-    }
 
     const loading  = () => {
         return(
@@ -84,7 +93,7 @@ const ShowMovie = ({movie, user, api})  => {
         return(
             <>
             {result.map((result, index) => {
-                {bucketList()}
+                // {bucketList()};
                 return(
                     <div key={index}>
                     <h1>{result.Type}</h1>
@@ -188,30 +197,31 @@ const ShowMovie = ({movie, user, api})  => {
         // console.log(pender)
 
         const result = viewMovie;
-        const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`
-        {bucketList()};
+        const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`;
+        bucketList(result);
         return(
             <>
             <h1>{result.Type}</h1>
             <h1> {result.Title}</h1>
             <img src={result.Poster} alt={result.Title}></img>
+            {bucketList(result)}
             <div className="generalData">
-                <h3>Genre: {result.Genre}</h3>
-                <h3>Language: {result.Language}</h3>
-                <h3>Year: {result.Year}</h3>
-                <h3>Rated: {result.Rated}</h3> 
-                <h3>Release: {result.Released}</h3>
-                <h3>Runtime: {result.Runtime}</h3>
-                <h3>Director: {result.Director}</h3>
-                <h3>Actors: { result.Actors}</h3>
-                <h3>Box Office: {result.BoxOffice}</h3>
-                <h3>Country: {result.Country}</h3>
-                <h3>DVD Release: {result.DVD}</h3>
-                <h3>Metascore: {result.Metascore}</h3>
-                <h3>Awards: {result.Awards}</h3>
-                <h3>Plot Summary: {result.Plot}</h3>
-                <h3>Production: {result.Production}</h3>
-                <h3>Website: {result.Website}</h3>
+                <h3>Genre:</h3> <p>{result.Genre}</p>
+                <h3>Language: </h3><p>{result.Language}</p>
+                <h3>Year:</h3> <p>{result.Year}</p>
+                <h3>Rated:</h3> <p>{result.Rated}</p> 
+                <h3>Release:</h3> <p>{result.Released}</p>
+                <h3>Runtime:</h3> <p>{result.Runtime}</p>
+                <h3>Director:</h3> <p>{result.Director}</p>
+                <h3>Actors:</h3> <p>{ result.Actors}</p>
+                <h3>Box Office:</h3> <p>{result.BoxOffice}</p>
+                <h3>Country:</h3> <p>{result.Country}</p>
+                <h3>DVD Release:</h3> <p>{result.DVD}</p>
+                <h3>Metascore:</h3> <p>{result.Metascore}</p>
+                <h3>Awards:</h3> <p>{result.Awards}</p>
+                <h3>Plot Summary:</h3> <p>{result.Plot}</p>
+                <h3>Production:</h3> <p>{result.Production}</p>
+                <h3>Website:</h3> <p>{result.Website}</p>
                 {result.Ratings.map((result, index) => {
                     return(
                         <div key={index}>

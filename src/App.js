@@ -52,7 +52,7 @@ function App() {
     <>
     <div className="App">
       <Header user={userState}/>
-      <Main getMovie={getMovie} movie={movie} user={userState} api={api_link}/>
+      <Main getMovie={getMovie} movie={movie} user={userState} api={api_link} findMovie={findMovie}/>
     </div>
     </>
   );

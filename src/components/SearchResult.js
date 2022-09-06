@@ -36,11 +36,12 @@ function SearchResult ({movie}) {
     const loadedAPI = () => {
         // console.log('error?')
         const result = movie.data;
+        const destination_url = `view/${result.imdbID}`
         return(
             <>
             <h1>{result.Type}</h1>
             <h1> {result.Title}</h1>
-            <Link to={result.Title}>
+            <Link to={destination_url}>
             <img src={result.Poster} alt={result.Title}></img>
             </Link>
             </>
