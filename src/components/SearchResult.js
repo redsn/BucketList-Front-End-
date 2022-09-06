@@ -1,5 +1,20 @@
 import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 // import {useEffect} from 'react';
+
+const StyledResultsMongo = styled.section`
+    background-color: green;
+    color: green;
+    .singleResult{
+        border: 1px solid green;
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+    .singleResult h1{
+        display: block;
+    }
+`
 
 function SearchResult ({movie}) {
 
@@ -8,7 +23,11 @@ function SearchResult ({movie}) {
     const loading  = () => {
         return(
             <>
-            <h1>Loading temp space</h1>
+            <StyledResultsMongo>
+
+            <h1>Loading Something....</h1>
+
+            </StyledResultsMongo>
             </>
         )
     };
@@ -17,10 +36,11 @@ function SearchResult ({movie}) {
         const result = movie;
         return(
             <>
+            <StyledResultsMongo>
             {result.map((result, index) => {
                 const destination_url = `view/${result.imdbID}`
                 return(
-                    <div key={index}>
+                    <div className="singleResult" key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
                     <Link to={destination_url}>
@@ -29,6 +49,7 @@ function SearchResult ({movie}) {
                     </div>
                 )
             })}
+            </StyledResultsMongo>
             </>
         )
     };

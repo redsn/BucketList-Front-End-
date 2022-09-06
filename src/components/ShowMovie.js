@@ -13,8 +13,7 @@ const ShowMovie = ({movie, user, api})  => {
     const newApi = `${api}view/`
     const rmvApi =  `${api}mod/`
 
-    const [count, setCount] = useState(0);
-    const updatePage = () => {setCount(count + 1)};
+
     const findByIdRef = useRef(null);
     const loadedRef = useRef(null);
     const loadingRef = useRef(null);
