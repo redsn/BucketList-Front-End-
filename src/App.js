@@ -17,7 +17,8 @@ import Header from './components/Header';
 
 function App() {
 
-  const api_link = 'http://localhost:4000/api/query/movies/'
+  // const api_link = 'http://localhost:4000/api/query/movies/'
+  const api_link = 'https://bucketlist-backend-proj.herokuapp.com/api/query/movies'
 
   //State for movie query
   const [movie, findMovie] = useState(null);
