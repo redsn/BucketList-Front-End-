@@ -1,4 +1,25 @@
 import {useState} from 'react';
+import styled from 'styled-components';
+
+const StyledSearchBar = styled.a`
+    
+    .inputtext{
+        width: 30vw;
+        padding: 3px;
+    }
+    .inputsub{
+        background-color: darkblue;
+        color: white;
+        font-weight: bold;
+        padding: 5px;
+        border: none;
+    }
+
+    form{
+        margin: 1vh
+    }
+
+`
 
 const SearchBar = ({getMovie}) => {
     const [ searchState, setSearchState ] = useState({
@@ -19,10 +40,13 @@ const SearchBar = ({getMovie}) => {
     };
     return(
         <>
+        <StyledSearchBar>
+            
         <form onSubmit={handleSubmit}>
-            <input type="text" value={searchState.searchFor} onChange={handleChange}/>
-            <input type="submit" value="Search" />
+            <input className="inputtext" type="text" value={searchState.searchFor} onChange={handleChange}/>
+            <input className="inputsub" type="submit" value="Search" />
         </form>
+        </StyledSearchBar>
         </>
     )
 }
