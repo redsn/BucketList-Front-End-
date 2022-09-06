@@ -41,7 +41,7 @@ const Browse = ({api}) => {
 
     useEffect(() => {
         findAllRef.current();
-        findAll();
+        // findAll();
         // browseRef.current()
     },[])
 
@@ -52,7 +52,7 @@ const Browse = ({api}) => {
     //     history.push("/home");
     // }
     const handlePosterClick = (val) =>{
-        console.log(val);
+        // console.log(val);
         window.location.replace(`/search/view/${val}`)
     }
 

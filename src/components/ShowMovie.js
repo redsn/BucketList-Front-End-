@@ -125,12 +125,6 @@ const ShowMovie = ({movie, user, api})  => {
 
     useEffect(() => {
         findByIdRef.current();
-        // loadedRef.current();
-        // loadingRef.current();
-        // viewMovieRef.current();
-        // loaded();
-        // viewMovie ? loaded() : loading();
-        // loaded()
 },[]);
 
 
