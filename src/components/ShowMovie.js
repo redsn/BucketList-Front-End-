@@ -10,16 +10,20 @@ import styled from 'styled-components';
 
 const StyledSingleView = styled.section`
 
-
+    background-color: rgb(245,245,245);
     img{
         width: 40vh;
     }
     .generalData{
         display: inline-block;
         width: 75vw;
+        border: 2px black solid;
+        box-shadow: 5px 5px grey;
     }
     .bucketClass{
-        margin: 0 auto;
+        border: 5px black solid;
+        box-shadow: 10px 10px 5px grey;
+        margin: 20px auto;
         display: block;
         width: fit-content;
         padding: 2vh;
@@ -44,22 +48,37 @@ const StyledSingleView = styled.section`
         width: fit-content;
         display: inline-block;
     }
+    img{
+        border: 10px solid white;
+        outline: 2px solid black;
+        box-shadow: 4px 4px 2px grey;
+    }
     .generalData div{ 
         padding: 3vw;
     }
     margin: 0 auto;
     .movieTitle{
         font-size: xxx-large;
+        text-shadow: 6px 6px 3px rgb(230,230,230);
     }
+    padding-top: 2vh;
     padding-bottom: 3vh;
     .plot{
         display: block;
-        margin: 0 auto;
+        margin: 10px auto;
+        border: 1px dotted black;
+        box-shadow: 4px 4px grey;
     }
     .buttons{
         display: block;
         padding-top: 5px;
         margin: 0 auto;
+    }
+    .non-reg{
+        margin-top: 10px;
+        font-style: italic;
+        display: block;
+        font-size: smaller;
     }
 `
 
@@ -190,7 +209,9 @@ const handleRemoveComplete = async (e) => {
                     <div>
                         <h1>BucketList</h1>
                         Finished {complete} / {onList} Listed
+                        <div className="non-reg">
                         *You must be registered to add this to your List
+                        </div>
                     </div>
                     </>
                 )

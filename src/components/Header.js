@@ -43,8 +43,8 @@ const StyledHeader = styled.header`
     }
     .titlecard{
         color: black;
-        font-size: xx-large;
-        font-weight: bold;
+        font-size: xxx-large;
+        font-weight: bolder;
     }
 
 `
