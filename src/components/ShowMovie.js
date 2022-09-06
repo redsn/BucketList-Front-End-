@@ -8,6 +8,61 @@ import styled from 'styled-components';
     complete: 
 */
 
+const StyledSingleView = styled.section`
+
+
+    img{
+        width: 40vh;
+    }
+    .generalData{
+        display: inline-block;
+        width: 75vw;
+    }
+    .bucketClass{
+        margin: 0 auto;
+        display: block;
+        width: fit-content;
+        padding: 2vh;
+        h1{
+            font-size: medium;
+        }
+        button{
+            display: block;
+            border: 2px black solid;
+            padding: 0.75vh;
+            background-color: lightblue;
+            color: white;
+            font-weight: bold;
+            margin: 10px auto;
+            font-size: large;
+        }
+        button:hover{
+            background-color: darkblue;
+        }
+    }
+    div{
+        width: fit-content;
+        display: inline-block;
+    }
+    .generalData div{ 
+        padding: 3vw;
+    }
+    margin: 0 auto;
+    .movieTitle{
+        font-size: xxx-large;
+    }
+    padding-bottom: 3vh;
+    .plot{
+        display: block;
+        margin: 0 auto;
+    }
+    .buttons{
+        display: block;
+        padding-top: 5px;
+        margin: 0 auto;
+    }
+`
+
 const ShowMovie = ({movie, user, api})  => {
 
     let {findIMDB} = useParams();
@@ -134,7 +189,7 @@ const handleRemoveComplete = async (e) => {
                     <>
                     <div>
                         <h1>BucketList</h1>
-                        {complete} / {onList}
+                        Finished {complete} / {onList} Listed
                         *You must be registered to add this to your List
                     </div>
                     </>
@@ -146,8 +201,10 @@ const handleRemoveComplete = async (e) => {
                     <>
                     <div>
                         <h1>BucketList</h1>
-                        {complete} / {onList}
+                        Finished {complete} / {onList} Listed
+                        <div className="buttons">
                         <button onClick={handleOnList}>Add To List</button>
+                        </div>
                     </div>
                     </>
                 )
@@ -157,9 +214,11 @@ const handleRemoveComplete = async (e) => {
                     <>
                     <div>
                         <h1>BucketList</h1>
-                        {complete} / {onList}
+                        Finished {complete} / {onList} Listed
+                        <div className="buttons">
                         <button onClick={handleComplete}>I've Watched this</button>
                         <button onClick={handleRemoveOnList}>Remove From List</button>
+                        </div>
                     </div>
                     </>
                 )
@@ -169,9 +228,11 @@ const handleRemoveComplete = async (e) => {
                     <>
                     <div>
                         <h1>BucketList</h1>
-                        {complete} / {onList}
+                        Finished {complete} / {onList} Listed
+                        <div className="buttons">
                         <button onClick={handleRemoveComplete}>Unwatch</button>
                         <button onClick={handleRemoveOnList}>Remove From List</button> 
+                        </div>
                     </div>
                     </>
                 )
@@ -225,7 +286,9 @@ const handleRemoveComplete = async (e) => {
     const loading  = () => {
         return(
             <>
+            <StyledSingleView>
             <h1>Loading temp space</h1>
+            </StyledSingleView>
             </>
         )
     };
@@ -239,6 +302,9 @@ const handleRemoveComplete = async (e) => {
             {result.map((result, index) => {
                 // {bucketList()};
                 return(
+                    <>
+                    <StyledSingleView>
+
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
@@ -281,6 +347,8 @@ const handleRemoveComplete = async (e) => {
 
 
                     </div>
+                    </StyledSingleView>
+                    </>
                 )
             })}
             </>
@@ -346,46 +414,51 @@ const handleRemoveComplete = async (e) => {
         bucketList(result);
         return(
             <>
-            <h1>{result.Type}</h1>
-            <h1> {result.Title}</h1>
+            <StyledSingleView>
+
+            <h1 className="movieTitle"> {result.Title}</h1>
+            <h5>({result.Type})</h5>
             <img src={result.Poster} alt={result.Title}></img>
+            <div className="bucketClass">
             {bucketList(result)}
+            </div>
             <div className="generalData">
-                <h3>Genre:</h3> <p>{result.Genre}</p>
-                <h3>Language: </h3><p>{result.Language}</p>
-                <h3>Year:</h3> <p>{result.Year}</p>
-                <h3>Rated:</h3> <p>{result.Rated}</p> 
-                <h3>Release:</h3> <p>{result.Released}</p>
-                <h3>Runtime:</h3> <p>{result.Runtime}</p>
-                <h3>Director:</h3> <p>{result.Director}</p>
-                <h3>Actors:</h3> <p>{ result.Actors}</p>
-                <h3>Box Office:</h3> <p>{result.BoxOffice}</p>
-                <h3>Country:</h3> <p>{result.Country}</p>
-                <h3>DVD Release:</h3> <p>{result.DVD}</p>
-                <h3>Metascore:</h3> <p>{result.Metascore}</p>
-                <h3>Awards:</h3> <p>{result.Awards}</p>
-                <h3>Plot Summary:</h3> <p>{result.Plot}</p>
-                <h3>Production:</h3> <p>{result.Production}</p>
-                <h3>Website:</h3> <p>{result.Website}</p>
+                <div className="plot"><h3>Plot Summary:</h3> <p>{result.Plot}</p></div>
+               <div><h3>Genre:</h3> <p>{result.Genre}</p></div>
+                <div><h3>Language: </h3><p>{result.Language}</p></div>
+                <div><h3>Year:</h3> <p>{result.Year}</p></div>
+                <div><h3>Rated:</h3> <p>{result.Rated}</p> </div>
+                <div><h3>Release:</h3> <p>{result.Released}</p></div>
+                <div><h3>Runtime:</h3> <p>{result.Runtime}</p></div>
+                <div><h3>Director:</h3> <p>{result.Director}</p></div>
+                <div><h3>Actors:</h3> <p>{ result.Actors}</p></div>
+                <div><h3>Box Office:</h3> <p>{result.BoxOffice}</p></div>
+                <div><h3>Country:</h3> <p>{result.Country}</p></div>
+                <div><h3>DVD Release:</h3> <p>{result.DVD}</p></div>
+                <div><h3>Metascore:</h3> <p>{result.Metascore}</p></div>
+                <div><h3>Awards:</h3> <p>{result.Awards}</p></div>
+                <div><h3>Production:</h3> <p>{result.Production}</p></div>
+                <div><h3>Website:</h3> <p>{result.Website}</p></div>
                 {result.Ratings.map((result, index) => {
                     return(
                         <div key={index}>
                     <h3>{result.Source}: {result.Value}</h3>
                         </div>
                 );
-                })}
+            })}
 
                 <h3>Writer(s): {result.Writer}</h3>
-            </div>
-
             <div className='imdbBox'>
                 
-                imdbid: <a href={imdbLink} target='_blank' rel='noreferrer'>{result.imdbID}</a>
-                imdbrating: {result.imdbRating}
-                imdbVotes: {result.imdbVotes}
+                <div><h3>imdbid:</h3> <a href={imdbLink} target='_blank' rel='noreferrer'>{result.imdbID}</a></div>
+                <div><h3>imdbrating:</h3> {result.imdbRating}</div>
+                <div><h3>imdbVotes:</h3> {result.imdbVotes}</div>
+            </div>
             </div>
 
 
+
+            </StyledSingleView>
             </>
         )
     }

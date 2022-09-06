@@ -11,7 +11,8 @@ const StyledSearchBar = styled.a`
         background-color: darkblue;
         color: white;
         font-weight: bold;
-        padding: 3px;
+        padding: 5px;
+        border: none;
     }
 
     form{
