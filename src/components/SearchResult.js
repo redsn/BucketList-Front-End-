@@ -3,16 +3,27 @@ import styled from 'styled-components';
 // import {useEffect} from 'react';
 
 const StyledResultsMongo = styled.section`
-    background-color: green;
-    color: green;
+    width: 25vw;
+    margin: 0 auto;
     .singleResult{
-        border: 1px solid green;
-        display: block;
+        margin-top: 3vh;
+        border: 2px solid grey;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        background-color: rgb(250,250,250);
+        box-shadow: 7px 7px black;
     }
     .singleResult h1{
         display: block;
+        font-size: xx-large;
+    }
+    .year{
+        font-style: italic;
+    }
+    img{
+        border: 30px rgb(220,220,220) solid;
     }
 `
 
@@ -40,12 +51,13 @@ function SearchResult ({movie}) {
             {result.map((result, index) => {
                 const destination_url = `view/${result.imdbID}`
                 return(
-                    <div className="singleResult" key={index}>
-                    <h1>{result.Type}</h1>
+                    <div className="singleResult" key={index} >
                     <h1> {result.Title}</h1>
+                    <h4 className="year">({result.Type})</h4>
                     <Link to={destination_url}>
                     <img src={result.Poster} alt={result.Title}></img>
                     </Link>
+                    <h4 className="year">{result.Year}</h4>
                     </div>
                 )
             })}
@@ -60,11 +72,12 @@ function SearchResult ({movie}) {
         const destination_url = `view/${result.imdbID}`
         return(
             <>
-            <h1>{result.Type}</h1>
             <h1> {result.Title}</h1>
+            <h4 className="year">({result.Type})</h4>
             <Link to={destination_url}>
             <img src={result.Poster} alt={result.Title}></img>
             </Link>
+            <h4 className="year">{result.Year}</h4>
             </>
         )
     };

@@ -14,7 +14,7 @@ import ShowMovie from '../components/ShowMovie';
 
 
 
-function Main({getMovie, movie, user, api}) {
+function Main({getMovie, movie, findMovie, user, api}) {
     // console.log(user);
 
     return(
@@ -29,12 +29,12 @@ function Main({getMovie, movie, user, api}) {
 
             <Route
                 path="/search"
-                element={<Search getMovie={getMovie} movie={movie}/>}
+                element={<Search getMovie={getMovie} movie={movie} findMovie={findMovie}/>}
             />
 
             <Route
                 path="/search/view/:findIMDB"
-                element={<ShowMovie getMovie={getMovie} movie={movie} user={user} api={api}/>}
+                element={<ShowMovie getMovie={getMovie} movie={movie} findMovie={findMovie} user={user} api={api}/>}
             />
 
             </Routes>

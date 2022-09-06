@@ -11,10 +11,10 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items:  center;
-    width: 85%;
     margin: 0 auto;
     background-color: lightblue;
     padding: 1rem;
+    border-bottom: darkblue solid 3px;
     a{
         text-decoration: none;
         color: white;
@@ -28,8 +28,11 @@ const StyledHeader = styled.header`
     .logger:hover{
         background-color: lightblue;
         color: black;
+        box-shadow: 5px 5px black;
     }
     .navButton{
+        text-decoration: none;
+        color: white;
         font-size: larger;
         font-weight: bold;
         padding: 1rem;
@@ -37,6 +40,11 @@ const StyledHeader = styled.header`
     .navButton:hover{
         background-color: darkblue;
 
+    }
+    .titlecard{
+        color: black;
+        font-size: xx-large;
+        font-weight: bold;
     }
 
 `
@@ -51,8 +59,9 @@ const Header = ({user}) => {
         <>
         <StyledHeader user={user}>
         <Link to="/">
-            <div className="navButton">Home</div>
+            <div><h3 className="titlecard">BucketList</h3></div>
         </Link>
+            <div className="navButton">Home</div>
         <Link to="search">
             <div className="navButton">Search</div>
         </Link>
