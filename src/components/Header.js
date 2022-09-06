@@ -61,7 +61,9 @@ const Header = ({user}) => {
         <Link to="/">
             <div><h3 className="titlecard">BucketList</h3></div>
         </Link>
-            <div className="navButton">Home</div>
+        <Link to="browse">
+            <div className="navButton">Browse</div>
+        </Link>
         <Link to="search">
             <div className="navButton">Search</div>
         </Link>
@@ -76,7 +78,9 @@ const Header = ({user}) => {
             {
                 user ?
                 <>
+                <Link to="profile">
                 <div><h3>{user.displayName}</h3></div>
+                </Link>
                 <div onClick={logout} className="logger">Log out</div>
                 </>
                 :
