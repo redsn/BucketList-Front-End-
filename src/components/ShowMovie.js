@@ -31,11 +31,11 @@ const ShowMovie = ({movie, user, api})  => {
 },[]);
 
 
-const handleListAppend = async (e) => {
+const handleOnList = async (e) => {
     // e.preventDefault();
     try {
-        const addMe = {onList: [user.email]}
-        console.log(addMe);
+        const addMe = {onList: user.email}
+        // console.log(addMe);
         await fetch(`${newApi}${findIMDB}`, {
             method: 'PUT',
             headers: {
@@ -47,20 +47,116 @@ const handleListAppend = async (e) => {
         
     }
 }
+
+const handleComplete = async (e) => {
+    try {
+        const addMe = {complete: user.email}
+        await fetch(`${newApi}${findIMDB}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(addMe)
+        })
+    } catch (error) {
+        
+    }
+}
+
+const handleRemoveOnList = async (e) => {
+    try {
+        const removeMe = {onList: user.email}
+        await fetch(`${newApi}${findIMDB}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(removeMe)
+        })
+    } catch (error) {
+        
+    }
+}
+
+const handleRemoveComplete = async (e) => {
+    try {
+        const removeMe = {complete: user.email}
+        await fetch(`${newApi}${findIMDB}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(removeMe)
+        })
+    } catch (error) {
+        
+    }
+}
+
+
     const bucketList = (movieData) => {
         try {
             if(movieData.onList && movieData.complete){
-                const complete = movieData.onList.length;
-                const onList = movieData.complete.length;
+                const complete = movieData.complete.length;
+                const onList = movieData.onList.length;
+            // Default View
+            function defaultView () {
+                return (
+                    <>
+                    <div>
+                        <h1>BucketList</h1>
+                        {complete} / {onList}
+                        *You must be registered to add this to your List
+                    </div>
+                    </>
+                )
+            }; 
+            // needs add to list; new item/not in favs
+            function notOnList () {
                 return(
                     <>
                     <div>
                         <h1>BucketList</h1>
                         {complete} / {onList}
-                        <button onClick={handleListAppend}>GTest</button>
+                        <button onClick={handleOnList}>Add To List</button>
                     </div>
                     </>
                 )
+            }
+            function isOnList () {
+                return(
+                    <>
+                    <div>
+                        <h1>BucketList</h1>
+                        {complete} / {onList}
+                        <button onClick={handleComplete}>I've Watched this</button>
+                        <button>Remove*temp</button>
+                    </div>
+                    </>
+                )
+            }; // remove from list & complete
+            try {
+                if(!user){
+                    return defaultView();
+                }
+                try {
+                    if(!movieData.onList.includes(user.email)){
+                        return notOnList();
+                    }
+                    try {
+                        if(movieData.onList.includes(user.email)){
+                            return isOnList();
+                        }
+                    } catch (error) {
+                        
+                    }
+                } catch (error) {
+                    
+                }
+            } catch (error) {
+                
+            }
+        /// Error handling
             } else {throw new Error('error')}
         } catch (error) {
             // console.log('error state');
@@ -98,7 +194,7 @@ const handleListAppend = async (e) => {
                     <div key={index}>
                     <h1>{result.Type}</h1>
                     <h1> {result.Title}</h1>
-                    <img onClick={handleListAppend} src={result.Poster} alt={result.Title}></img>
+                    <img src={result.Poster} alt={result.Title}></img>
                     <div className="generalData">
                         <h3>Genre: {result.Genre}</h3>
                         <h3>Language: {result.Language}</h3>
@@ -195,6 +291,7 @@ const handleListAppend = async (e) => {
     const loaded = () => {
         // const pender = viewMovie
         // console.log(pender)
+        console.log('on loaded')
 
         const result = viewMovie;
         const imdbLink = `https://www.imdb.com/title/${result.imdbID}/`;
