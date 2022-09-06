@@ -1,6 +1,6 @@
 // import {useEffect} from 'react';
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams} from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 
 /*
    onList: {type: Array}, // Array of user IDs
@@ -11,10 +11,26 @@ const ShowMovie = ({movie, user, api})  => {
 
     let {findIMDB} = useParams();
     const newApi = `${api}view/`
-    // console.log(test);
-    // console.log(newApi);
+    const rmvApi =  `${api}mod/`
+
+    const [count, setCount] = useState(0);
+    const updatePage = () => {setCount(count + 1)};
+    const findByIdRef = useRef(null);
+    const loadedRef = useRef(null);
+    const loadingRef = useRef(null);
+    const viewMovieRef = useRef(null);
 
     const [viewMovie, setViewMovie] = useState(null);
+
+    // const updateThisPage = () => {setViewMovie((prevState)=>({
+    //     console.log(prevState)
+        
+    //     // onList: Array.push(user.email)
+    // }))}
+    // const updateThisPage = () => {setViewMovie((prevState)=>(console.log(prevState),{
+    //     // ...prevState,
+    //     // onList: [...this.movie.onList, `${user.email}`]
+    // }))}
 
     const findByID = async () => {
         const imdbResult = await fetch(`${newApi}${findIMDB}`)
@@ -26,8 +42,21 @@ const ShowMovie = ({movie, user, api})  => {
         }
     }
 
+    useEffect(()=>{
+        findByIdRef.current = findByID;
+        loadedRef.current = loaded;
+        loadingRef.current = loading;
+        viewMovieRef.current = viewMovie;
+    })
+
     useEffect(() => {
-    findByID();
+        findByIdRef.current();
+        // loadedRef.current();
+        // loadingRef.current();
+        // viewMovieRef.current();
+        // loaded();
+        // viewMovie ? loaded() : loading();
+        // loaded()
 },[]);
 
 
@@ -42,7 +71,7 @@ const handleOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        })
+        },window.location.reload());
     } catch (error) {
         
     }
@@ -50,14 +79,14 @@ const handleOnList = async (e) => {
 
 const handleComplete = async (e) => {
     try {
-        const addMe = {complete: user.email}
+        const addMe = {complete: user.email};
         await fetch(`${newApi}${findIMDB}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        })
+        },window.location.reload());
     } catch (error) {
         
     }
@@ -66,13 +95,13 @@ const handleComplete = async (e) => {
 const handleRemoveOnList = async (e) => {
     try {
         const removeMe = {onList: user.email}
-        await fetch(`${newApi}${findIMDB}`, {
+        await fetch(`${rmvApi}${findIMDB}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        })
+        },window.location.reload())
     } catch (error) {
         
     }
@@ -81,13 +110,13 @@ const handleRemoveOnList = async (e) => {
 const handleRemoveComplete = async (e) => {
     try {
         const removeMe = {complete: user.email}
-        await fetch(`${newApi}${findIMDB}`, {
+        await fetch(`${rmvApi}${findIMDB}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        })
+        },window.location.reload())
     } catch (error) {
         
     }
@@ -130,11 +159,23 @@ const handleRemoveComplete = async (e) => {
                         <h1>BucketList</h1>
                         {complete} / {onList}
                         <button onClick={handleComplete}>I've Watched this</button>
-                        <button>Remove*temp</button>
+                        <button onClick={handleRemoveOnList}>Remove From List</button>
                     </div>
                     </>
                 )
             }; // remove from list & complete
+            function onListAndComplete () {
+                return(
+                    <>
+                    <div>
+                        <h1>BucketList</h1>
+                        {complete} / {onList}
+                        <button onClick={handleRemoveComplete}>Unwatch</button>
+                        <button onClick={handleRemoveOnList}>Remove From List</button> 
+                    </div>
+                    </>
+                )
+            }
             try {
                 if(!user){
                     return defaultView();
@@ -144,8 +185,15 @@ const handleRemoveComplete = async (e) => {
                         return notOnList();
                     }
                     try {
-                        if(movieData.onList.includes(user.email)){
+                        if(movieData.onList.includes(user.email) && !movieData.complete.includes(user.email)){
                             return isOnList();
+                        }
+                        try {
+                            if(movieData.complete.includes(user.email)){
+                                return onListAndComplete();
+                            }
+                        } catch (error) {
+                            
                         }
                     } catch (error) {
                         
@@ -351,12 +399,18 @@ const handleRemoveComplete = async (e) => {
         }
         try {
             // console.log('On try via API');
-            return movie ? loaded() : loading();
+            // return movie ? loaded() : loading();
+            return viewMovie ? loaded() : loading();
         } catch (error) {
             // console.log('On MDB attempt')
             return movie ? loadedMDB() : loading();
         }
     } catch (error) {
+        try {
+            return viewMovie ? loaded() : loading();
+        } catch (error) {
+            return <h1>Something went wrong</h1>
+        }
     }
 };
 
