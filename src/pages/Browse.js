@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 const StyledBrowse = styled.section`
     padding-top: 1.5vh;
@@ -15,8 +16,10 @@ const StyledBrowse = styled.section`
     }
 `
 
+
 const Browse = ({api}) => {
     const [browse, setBrowse] = useState(null);
+    const navigate = useNavigate();
 
     const browseRef = useRef(null);
     const findAllRef = useRef(null);
@@ -53,7 +56,8 @@ const Browse = ({api}) => {
     // }
     const handlePosterClick = (val) =>{
         // console.log(val);
-        window.location.replace(`/search/view/${val}`)
+        // window.location.replace(`/search/view/${val}`)
+        navigate(`/search/view/${val}`)
     }
 
     const loaded = () => {
