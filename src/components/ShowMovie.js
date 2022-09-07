@@ -88,6 +88,8 @@ const ShowMovie = ({movie, user, api})  => {
     const newApi = `${api}view/`
     const rmvApi =  `${api}mod/`
 
+    // search/view/tt0147746
+
     const navigate = useNavigate();
 
 
@@ -141,7 +143,7 @@ const handleOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },navigate('/'));
+        },navigate(`/search/view/${findIMDB}`));
     } catch (error) {
         
     }
@@ -156,7 +158,7 @@ const handleComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },navigate('/'));
+        },navigate(`/search/view/${findIMDB}`));
     } catch (error) {
         
     }
@@ -171,7 +173,7 @@ const handleRemoveOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },navigate('/'))
+        },navigate(`/search/view/${findIMDB}`))
     } catch (error) {
         
     }
@@ -186,7 +188,7 @@ const handleRemoveComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },navigate('/'))
+        },navigate(`/search/view/${findIMDB}`))
     } catch (error) {
         
     }
