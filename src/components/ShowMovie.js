@@ -139,7 +139,7 @@ const handleOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },window.location.reload());
+        });
     } catch (error) {
         
     }
@@ -154,7 +154,7 @@ const handleComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },window.location.reload());
+        });
     } catch (error) {
         
     }
@@ -169,7 +169,7 @@ const handleRemoveOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },window.location.reload())
+        })
     } catch (error) {
         
     }
@@ -184,7 +184,7 @@ const handleRemoveComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },window.location.reload())
+        })
     } catch (error) {
         
     }
