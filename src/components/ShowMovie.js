@@ -1,5 +1,5 @@
 // import {useEffect} from 'react';
-import { useParams} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import styled from 'styled-components';
 
@@ -88,6 +88,8 @@ const ShowMovie = ({movie, user, api})  => {
     const newApi = `${api}view/`
     const rmvApi =  `${api}mod/`
 
+    const navigate = useNavigate();
+
 
     const findByIdRef = useRef(null);
     const loadedRef = useRef(null);
@@ -139,7 +141,7 @@ const handleOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },console.log('e'));
+        },navigate('/'));
     } catch (error) {
         
     }
@@ -154,7 +156,7 @@ const handleComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(addMe)
-        },console.log('e'));
+        },navigate('/'));
     } catch (error) {
         
     }
@@ -169,7 +171,7 @@ const handleRemoveOnList = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },console.log('e'))
+        },navigate('/'))
     } catch (error) {
         
     }
@@ -184,7 +186,7 @@ const handleRemoveComplete = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(removeMe)
-        },console.log('e'))
+        },navigate('/'))
     } catch (error) {
         
     }
