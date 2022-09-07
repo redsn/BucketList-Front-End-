@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledProfilePosters = styled.section`
@@ -38,6 +39,7 @@ const StyledPersonal = styled.div`
 const Profile = ({api, user}) => {
 
     const [browse, setBrowse] = useState(null);
+    const navigate = useNavigate();
 
 
     const browseRef = useRef(null);
@@ -70,7 +72,8 @@ const Profile = ({api, user}) => {
     
 
     const handlePosterClick = (val) =>{
-        window.location.replace(`/search/view/${val}`)
+        // window.location.replace(`/search/view/${val}`)
+        navigate(`/search/view/${val}`)
     }
 
     // var str = "Rs. 6,67,000";

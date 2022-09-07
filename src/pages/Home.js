@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeStyle = styled.section`
     border: 1px solid black;
@@ -15,6 +16,7 @@ const HomeStyle = styled.section`
 function Home ({api, user}) {
 
     const [oneState, setOneState] = useState(null);
+    const navigate = useNavigate();
 
     const oneStateRef = useRef(null);
     const findOneRef = useRef(null);
@@ -45,7 +47,8 @@ function Home ({api, user}) {
 
     const handlePosterClick = (val) =>{
         // console.log(val);
-        window.location.replace(`/search/view/${val}`)
+        // window.location.replace(`/search/view/${val}`)
+        navigate(`/search/view/${val}`);
     }
 
     const loaded = () => {
